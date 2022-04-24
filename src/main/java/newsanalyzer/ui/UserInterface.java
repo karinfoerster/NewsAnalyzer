@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import newsanalyzer.ctrl.Controller;
+import newsapi.NewsApi;
+import newsapi.NewsApiBuilder;
+import newsapi.enums.Category;
+import newsapi.enums.Country;
+import newsapi.enums.Endpoint;
 
 public class UserInterface 
 {
@@ -13,15 +18,45 @@ public class UserInterface
 	private Controller ctrl = new Controller();
 
 	public void getDataFromCtrl1(){
-		System.out.println("ABC");
+		System.out.println("Corona News");
 
-		ctrl.process();
+		NewsApi newsApi = new NewsApiBuilder()
+				.setApiKey(Controller.APIKEY)
+				.setQ("corona")
+				.setEndPoint(Endpoint.TOP_HEADLINES)
+				.setSourceCountry(Country.at)
+				.setSourceCategory(Category.health)
+				.createNewsApi();
+
+		ctrl.process("Corona", Category.health);
 	}
 
 	public void getDataFromCtrl2(){
+		System.out.println("Search for Hardware");
+
+		NewsApi newsApi = new NewsApiBuilder()
+				.setApiKey(Controller.APIKEY)
+				.setQ("hardware")
+				.setEndPoint(Endpoint.TOP_HEADLINES)
+				.setSourceCountry(Country.at)
+				.setSourceCategory(Category.technology)
+				.createNewsApi();
+
+		ctrl.process("Hardware", Category.technology);
 	}
 
 	public void getDataFromCtrl3(){
+		System.out.println("Search for Movies");
+
+		NewsApi newsApi = new NewsApiBuilder()
+				.setApiKey(Controller.APIKEY)
+				.setQ("movie")
+				.setEndPoint(Endpoint.TOP_HEADLINES)
+				.setSourceCountry(Country.at)
+				.setSourceCategory(Category.entertainment)
+				.createNewsApi();
+
+		ctrl.process("Movie", Category.entertainment);
 
 	}
 	
