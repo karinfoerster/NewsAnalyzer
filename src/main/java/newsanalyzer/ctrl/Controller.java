@@ -2,7 +2,7 @@ package newsanalyzer.ctrl;
 
 public class Controller {
 
-	public static final String APIKEY = "myAPIKey";
+	public static final String APIKEY = "7cca69bfbb4f4242aee753eb7ce2f5a9";
 
 	public void process() {
 		System.out.println("Start process");
