@@ -87,7 +87,9 @@ public class NewsApi {
         return apiKey;
     }
 
-    public NewsApi(String q, String qInTitle, Country sourceCountry, Category sourceCategory, String domains, String excludeDomains, String from, String to, Language language, SortBy sortBy, String pageSize, String page, String apiKey, Endpoint endpoint) {
+    public NewsApi(String q, String qInTitle, Country sourceCountry, Category sourceCategory,
+                   String domains, String excludeDomains, String from, String to, Language language, SortBy sortBy,
+                   String pageSize, String page, String apiKey, Endpoint endpoint) {
         this.q = q;
         this.qInTitle = qInTitle;
         this.sourceCountry = sourceCountry;
