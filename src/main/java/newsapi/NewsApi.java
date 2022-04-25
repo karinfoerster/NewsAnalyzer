@@ -136,39 +136,72 @@ public class NewsApi {
         String urlbase = String.format(NEWS_API_URL,getEndpoint().getValue(),getQ(),getApiKey());
         StringBuilder sb = new StringBuilder(urlbase);
 
-        if(getFrom() != null){
-            sb.append(DELIMITER).append("from=").append(getFrom());
+        try {
+            urlbase = String.format(NEWS_API_URL, getEndpoint().getValue(),getApiKey());
+            sb = new StringBuilder(urlbase);
+        } catch (Exception e) {
+            return "Error: URL is not working";
         }
-        if(getTo() != null){
-            sb.append(DELIMITER).append("to=").append(getTo());
-        }
-        if(getPage() != null){
-            sb.append(DELIMITER).append("page=").append(getPage());
-        }
-        if(getPageSize() != null){
-            sb.append(DELIMITER).append("pageSize=").append(getPageSize());
-        }
-        if(getLanguage() != null){
-            sb.append(DELIMITER).append("language=").append(getLanguage());
-        }
-        if(getSourceCountry() != null){
-            sb.append(DELIMITER).append("country=").append(getSourceCountry());
-        }
-        if(getSourceCategory() != null){
-            sb.append(DELIMITER).append("category=").append(getSourceCategory());
-        }
-        if(getDomains() != null){
-            sb.append(DELIMITER).append("domains=").append(getDomains());
-        }
-        if(getExcludeDomains() != null){
-            sb.append(DELIMITER).append("excludeDomains=").append(getExcludeDomains());
-        }
-        if(getqInTitle() != null){
-            sb.append(DELIMITER).append("qInTitle=").append(getqInTitle());
-        }
-        if(getSortBy() != null){
-            sb.append(DELIMITER).append("sortBy=").append(getSortBy());
-        }
+
+        System.out.println(urlbase);
+
+try {
+    if (getFrom() != null) {
+        sb.append(DELIMITER).append("from=").append(getFrom());
+    } else {
+        throw new NewsApiException("From is null");
+    }
+    if (getTo() != null) {
+        sb.append(DELIMITER).append("to=").append(getTo());
+    }
+    if (getPage() != null) {
+        sb.append(DELIMITER).append("page=").append(getPage());
+    } else {
+        throw new NewsApiException("To is null");
+    }
+    if (getPageSize() != null) {
+        sb.append(DELIMITER).append("pageSize=").append(getPageSize());
+    } else {
+        throw new NewsApiException("getPageSize is null");
+    }
+    if (getLanguage() != null) {
+        sb.append(DELIMITER).append("language=").append(getLanguage());
+    } else {
+        throw new NewsApiException("getLanguage is null");
+    }
+    if (getSourceCountry() != null) {
+        sb.append(DELIMITER).append("country=").append(getSourceCountry());
+    } else {
+        throw new NewsApiException("getSourceCountry is null");
+    }
+    if (getSourceCategory() != null) {
+        sb.append(DELIMITER).append("category=").append(getSourceCategory());
+    } else {
+        throw new NewsApiException("getSourceCategory is null");
+    }
+    if (getDomains() != null) {
+        sb.append(DELIMITER).append("domains=").append(getDomains());
+    } else {
+        throw new NewsApiException("Domain is null");
+    }
+    if (getExcludeDomains() != null) {
+        sb.append(DELIMITER).append("excludeDomains=").append(getExcludeDomains());
+    } else {
+        throw new NewsApiException("ExcludeDomain is null");
+    }
+    if (getqInTitle() != null) {
+        sb.append(DELIMITER).append("qInTitle=").append(getqInTitle());
+    } else {
+        throw new NewsApiException("qInTitle is null");
+    }
+    if (getSortBy() != null) {
+        sb.append(DELIMITER).append("sortBy=").append(getSortBy());
+    } else {
+        throw new NewsApiException("SortBy is null");
+    }
+} catch (NewsApiException e) {
+    System.out.println(e.getMessage());
+}
         return sb.toString();
     }
 

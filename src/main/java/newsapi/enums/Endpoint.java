@@ -5,13 +5,15 @@ public enum Endpoint {
 
     EVERYTHING("everything");
 
-    private String endPoint;
+    private final String endPoint;
 
     Endpoint(String endPoint){
+
         this.endPoint = endPoint;
     }
 
     public String getValue() {
+
         return endPoint;
     }
 }

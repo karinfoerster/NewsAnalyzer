@@ -4,6 +4,7 @@ package newsanalyzer.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import newsanalyzer.ctrl.Controller;
 import newsapi.NewsApi;
@@ -14,7 +15,6 @@ import newsapi.enums.Endpoint;
 
 public class UserInterface 
 {
-
 	private Controller ctrl = new Controller();
 
 	public void getDataFromCtrl1(){
@@ -28,7 +28,7 @@ public class UserInterface
 				.setSourceCategory(Category.health)
 				.createNewsApi();
 
-		ctrl.process("Corona", Category.health);
+		ctrl.process(newsApi);
 	}
 
 	public void getDataFromCtrl2(){
@@ -42,7 +42,7 @@ public class UserInterface
 				.setSourceCategory(Category.technology)
 				.createNewsApi();
 
-		ctrl.process("Hardware", Category.technology);
+		ctrl.process(newsApi);
 	}
 
 	public void getDataFromCtrl3(){
@@ -56,22 +56,31 @@ public class UserInterface
 				.setSourceCategory(Category.entertainment)
 				.createNewsApi();
 
-		ctrl.process("Movie", Category.entertainment);
+		ctrl.process(newsApi);
 
 	}
 	
 	public void getDataForCustomInput() {
-		
+		System.out.println("User Input");
+		Scanner scanner = new Scanner(System.in);
+
+		NewsApi newsApi = new NewsApiBuilder()
+				.setApiKey(Controller.APIKEY)
+				.setQ(scanner.next())
+				.setEndPoint(Endpoint.TOP_HEADLINES)
+				.createNewsApi();
+
+		ctrl.process(newsApi);
 	}
 
 
 	public void start() {
-		Menu<Runnable> menu = new Menu<>("User Interfacx");
+		Menu<Runnable> menu = new Menu<>("User Interface");
 		menu.setTitel("Wählen Sie aus:");
-		menu.insert("a", "Choice ABC", this::getDataFromCtrl1);
-		menu.insert("b", "Choice DEF", this::getDataFromCtrl2);
-		menu.insert("c", "Choice 3", this::getDataFromCtrl3);
-		menu.insert("d", "Choice User Imput:",this::getDataForCustomInput);
+		menu.insert("a", "Corona News", this::getDataFromCtrl1);
+		menu.insert("b", "Hardware News", this::getDataFromCtrl2);
+		menu.insert("c", "Movie News", this::getDataFromCtrl3);
+		menu.insert("d", "User Input:",this::getDataForCustomInput);
 		menu.insert("q", "Quit", null);
 		Runnable choice;
 		while ((choice = menu.exec()) != null) {
